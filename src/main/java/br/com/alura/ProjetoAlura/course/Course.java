@@ -2,7 +2,7 @@ package br.com.alura.ProjetoAlura.course;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Course {
@@ -14,7 +14,7 @@ public class Course {
     private String code;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private LocalDate inactivationDate;
+    private LocalDateTime inactivationDate;
     private Long instructorId;
 
     public Course(String name, String description, String code, Status status) {
@@ -68,11 +68,11 @@ public class Course {
         this.status = status;
     }
 
-    public LocalDate getInactivationDate() {
+    public LocalDateTime getInactivationDate() {
         return inactivationDate;
     }
 
-    public void setInactivationDate(LocalDate inactivationDate) {
+    public void setInactivationDate(LocalDateTime inactivationDate) {
         this.inactivationDate = inactivationDate;
     }
 
