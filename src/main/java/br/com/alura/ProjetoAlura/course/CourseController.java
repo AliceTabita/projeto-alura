@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 @RestController
 public class CourseController {
     private final CourseRepository courseRepository;
@@ -39,9 +42,16 @@ public class CourseController {
 
     @PostMapping("/course/{code}/inactive")
     public ResponseEntity createCourse(@PathVariable("code") String courseCode) {
-        // TODO: Implementar a Questão 2 - Inativação de Curso aqui...
-
-        return ResponseEntity.ok().build();
+        Course course = courseRepository.findByCode(courseCode);
+        if(course == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Não existe curso com o código " + courseCode);
+        }else if(course.getStatus().equals(Status.INACTIVE)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Este curso já está inativo");
+        }
+        course.setInactivationDate(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+        course.setStatus(Status.INACTIVE);
+        courseRepository.save(course);
+        return ResponseEntity.ok().body(course);
     }
 
 }
