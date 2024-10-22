@@ -3,6 +3,7 @@ package br.com.alura.ProjetoAlura.course;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 public class NewCourseDTO {
@@ -14,6 +15,7 @@ public class NewCourseDTO {
     @NotNull
     @NotBlank
     @Length(min = 4, max = 10)
+    @Pattern(regexp = "^[a-zA-Z-]*$", message = "O campo não pode conter caracteres especiais ou números")
     private String code;
 
     private String description;
@@ -23,7 +25,8 @@ public class NewCourseDTO {
     @Email
     private String instructorEmail;
 
-    public NewCourseDTO() {}
+    public NewCourseDTO() {
+    }
 
     public String getName() {
         return name;
@@ -55,5 +58,9 @@ public class NewCourseDTO {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
+    }
+
+    public Course toModel() {
+        return new Course(name, description, code, Status.ACTIVE);
     }
 }
