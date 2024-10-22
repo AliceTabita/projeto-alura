@@ -16,6 +16,7 @@ public class Course {
     private Status status;
     private LocalDateTime inactivationDate;
     private Long instructorId;
+    private Integer totalRegistrations;
 
     public Course(String name, String description, String code, Status status) {
         this.name = name;
@@ -26,6 +27,14 @@ public class Course {
     @Deprecated
     public Course() {
 
+    }
+
+    public Integer getTotalRegistrations() {
+        return totalRegistrations;
+    }
+
+    public void setTotalRegistration(Integer totalRegistrations) {
+        this.totalRegistrations = totalRegistrations;
     }
 
     public Long getId() {

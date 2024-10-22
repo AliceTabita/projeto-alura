@@ -6,6 +6,7 @@ CREATE TABLE Course(
                        status enum('ACTIVE', 'INACTIVE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'ACTIVE',
                        inactivationDate datetime,
                        instructorId bigint(20) NOT NULL,
+                        totalRegistrations int(),
                        PRIMARY KEY (id),
                        FOREIGN KEY (instructorId) REFERENCES User (id)
 )
